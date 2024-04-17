@@ -53,3 +53,5 @@ G.add_weighted_edges_from(weighted_edges)
 ranked = nx.pagerank(G)
 ranked_array = np.array(list(ranked.items()))
 print(ranked_array)  # comment out to speed up program
+
+# testing 2
