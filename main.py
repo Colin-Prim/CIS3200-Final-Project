@@ -64,3 +64,23 @@ while n < 10:
     index = sorted_array[n][0]
     print(pos_pages.loc[index].page)
     n += 1
+
+total_visits = daily_visits.sum(axis=0)
+
+new_weighted_edges = [(from_node, to_node, total_visits.get(to_node, np.nan)) for from_node, to_node in edges]
+
+G_new = nx.DiGraph()
+G_new.add_weighted_edges_from(new_weighted_edges)
+
+new_ranked = nx.pagerank(G_new)
+new_ranked_array = np.array(list(new_ranked.items()))
+
+new_sorted = sorted(new_ranked.items(), key=lambda item:item[1], reverse=True)
+new_array = np.array(list(new_sorted))
+
+print("Default Parameters:")
+n=0
+while n < 10:
+    index = new_array[n][0]
+    print(pos_pages.loc[index].page)
+    n += 1
