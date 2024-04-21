@@ -34,6 +34,8 @@ daily_visits = pd.DataFrame.from_dict(time_periods, orient="index", columns=['y'
 daily_visits = pd.DataFrame(daily_visits.y.to_list())
 daily_visits = daily_visits.set_index(pd.to_datetime(dates))
 
+total_visits = daily_visits.sum(axis=0)
+
 #  allows finding of position (pos) from page name
 #  sample syntax: pages_pos.loc['Mathematics'].pos yields 0
 pages_pos = pd.DataFrame.from_dict(data['node_ids'], orient='index')
@@ -52,6 +54,14 @@ G.add_weighted_edges_from(weighted_edges)
 #  rank pages and convert to a numpy array
 ranked = nx.pagerank(G)
 ranked_array = np.array(list(ranked.items()))
-print(ranked_array)  # comment out to speed up program
+ranked_df = pd.DataFrame.from_dict(ranked, orient="index")
+# print(ranked_array)  # comment out to speed up program
 
-#testing
+new_weighted_edges = [(from_node, to_node, total_visits.get(to_node, np.nan)) for from_node, to_node in edges]
+
+G_new = nx.DiGraph()
+G_new.add_weighted_edges_from(new_weighted_edges)
+
+new_ranked = nx.pagerank(G_new)
+new_ranked_array = np.array(list(new_ranked.items()))
+# print(new_ranked_array)  # comment out to speed up program
