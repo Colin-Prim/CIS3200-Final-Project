@@ -94,3 +94,51 @@ while n < 10:
 # pagerank using visitation weights had 1 page in common with the top 10 most visited pages
 # pagerank using normal weights had 0 pages in common with the top 10 most visited pages
 # we will adjust the parameters in pagerank using visitation weights to see if we can get more accurate results
+
+# changing alpha to 0.95 instead of the default (0.85)
+variation_1 = nx.pagerank(G_new, alpha=0.95)
+variation_1_array = np.array(list(variation_1.items()))
+
+# sort ranked pages and convert to array
+variation_1_sorted = sorted(variation_1.items(), key=lambda item:item[1], reverse=True)
+variation_1_sorted_array = np.array(list(variation_1_sorted))
+
+# display top 10 pages when changing alpha to 0.95
+print("Alpha = 0.95")
+n=0
+while n < 10:
+    index = variation_1_sorted_array[n][0]
+    print(pos_pages.loc[index].page)
+    n += 1
+
+# changing alpha to 0.75
+variation_2 = nx.pagerank(G_new, alpha=0.75)
+variation_2_array = np.array(list(variation_2.items()))
+
+# sort ranked pages and convert to array
+variation_2_sorted = sorted(variation_2.items(), key=lambda item:item[1], reverse=True)
+variation_2_sorted_array = np.array(list(variation_2_sorted))
+
+# display top 10 pages when changing alpha to 0.75
+print("Alpha = 0.75:")
+n=0
+while n < 10:
+    index = variation_2_sorted_array[n][0]
+    print(pos_pages.loc[index].page)
+    n += 1
+
+# changing error tolerance to 1e-02 instead of the default (1e-06)
+variation_3 = nx.pagerank(G_new, tol=1e-02)
+variation_3_array = np.array(list(variation_3.items()))
+
+# sort ranked pages and convert to array
+variation_3_sorted = sorted(variation_3.items(), key=lambda item:item[1], reverse=True)
+variation_3_sorted_array = np.array(list(variation_3_sorted))
+
+# display top 10 pages when changing error tolerance to 1e-02
+print("Error Tolerance = .01:")
+n=0
+while n < 10:
+    index = variation_3_sorted_array[n][0]
+    print(pos_pages.loc[index].page)
+    n += 1
