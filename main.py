@@ -54,11 +54,15 @@ ranked = nx.pagerank(G)
 ranked_array = np.array(list(ranked.items()))
 #print(ranked_array)  # comment out to speed up program
 
+
+# sort the ranked pages in ascending order by pagerank and convert to array
 pagerank_sorted = sorted(ranked.items(), key=lambda item:item[1], reverse=True)
 sorted_array = np.array(list(pagerank_sorted))
-#print(sorted_array[:10])
+#print(sorted_array) # comment out to speed up program
 
-print("Default Parameters:")
+
+# display the top 10 pages based on default parameters and normal weights
+print("Default Parameters with Normal Weights:")
 n=0
 while n < 10:
     index = sorted_array[n][0]
@@ -75,12 +79,18 @@ G_new.add_weighted_edges_from(new_weighted_edges)
 new_ranked = nx.pagerank(G_new)
 new_ranked_array = np.array(list(new_ranked.items()))
 
+# sort the ranked pages from pagerank based on total visitation weights and convert to array
 new_sorted = sorted(new_ranked.items(), key=lambda item:item[1], reverse=True)
 new_array = np.array(list(new_sorted))
 
-print("Default Parameters:")
+# display top 10 pages based on default parameters and total visitation weights
+print("Default Parameters with Total Visitation Weights:")
 n=0
 while n < 10:
     index = new_array[n][0]
     print(pos_pages.loc[index].page)
     n += 1
+
+# pagerank using visitation weights had 1 page in common with the top 10 most visited pages
+# pagerank using normal weights had 0 pages in common with the top 10 most visited pages
+# we will adjust the parameters in pagerank using visitation weights to see if we can get more accurate results
