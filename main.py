@@ -52,4 +52,15 @@ G.add_weighted_edges_from(weighted_edges)
 #  rank pages and convert to a numpy array
 ranked = nx.pagerank(G)
 ranked_array = np.array(list(ranked.items()))
-print(ranked_array)  # comment out to speed up program
+#print(ranked_array)  # comment out to speed up program
+
+pagerank_sorted = sorted(ranked.items(), key=lambda item:item[1], reverse=True)
+sorted_array = np.array(list(pagerank_sorted))
+#print(sorted_array[:10])
+
+print("Default Parameters:")
+n=0
+while n < 10:
+    index = sorted_array[n][0]
+    print(pos_pages.loc[index].page)
+    n += 1
