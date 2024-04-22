@@ -1,1 +1,3 @@
 # CIS3200-Final-Project
+
+This project was completed with equal contributions between Colin Prim (Colin-Prim), Derek Papierski (d-pap), and Kylie Falkey (kfalkey). The intention was to modify the standard PageRank algorithm, which takes into account only the presence of links, to also consider viewership of pages in its calculations. We did this using the *Wikipedia Math Essentials* dataset. We attempted to weight the dataset by page visitation. While our efforts were ultimately unsuccessful, we found promising results by weighting the edges of the graph by the total views of the receiving page (the page that is linked to). We suspect that we are on the right track, but do not beleive that our results warrant significant traction within the data science community. 
