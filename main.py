@@ -57,7 +57,7 @@ G.add_weighted_edges_from(weighted_edges)
 #  rank pages and convert to a numpy array
 ranked = nx.pagerank(G)
 
-new_sorted = sorted(ranked.items(), key=lambda item: item[1], reverse=False)
+new_sorted = sorted(ranked.items(), key=lambda item: item[1], reverse=True)
 new_array = np.array(list(new_sorted))
 
 print("Weighted by Number of Duplicate Edges:")
