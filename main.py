@@ -6,23 +6,27 @@ import pandas as pd
 import networkx as nx
 
 #  loading data
-#with open("wikivital_mathematics.json") as f:
+# with open("wikivital_mathematics.json") as f:
 #    data = json.load(f)
 '''
     Make load data function so I can call it in my ipynb???
     Instead of loading the data like we did above ^^^
 '''
+
+
 def get_data():
-    '''Returns a dict of data from data file'''
+    """Returns a dict of data from data file"""
     with open("wikivital_mathematics.json") as f:
-        data = json.load(f)
-    return data
-#data = get_data()
+        local_data = json.load(f)
+    return local_data
+
+
+# data = get_data()
 
 if __name__ == "__main__":
-  
+
     data = get_data()
-    
+
     #  numpy array of edges
     edges = np.array(data['edges'])
     #  numpy array of all weights
@@ -74,7 +78,6 @@ if __name__ == "__main__":
     pagerank_sorted = sorted(ranked.items(), key=lambda item: item[1], reverse=True)
     sorted_array = np.array(list(pagerank_sorted))
     # print(sorted_array) # comment out to speed up program
-
 
     # display the top 10 pages based on default parameters and normal weights
     print("Default Parameters with Normal Weights:")
@@ -212,7 +215,6 @@ if __name__ == "__main__":
     #     index = new_array[n][0]
     #     print(pos_pages.loc[index].page)
     #     n += 1
-
 
     '''Weighting by Total Visitation of Outgoing Node Minus Average Total Visitation'''
     new_weighted_edges = [(from_node, to_node, total_visits.get(from_node, np.nan) - avg_total_visits)
